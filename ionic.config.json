@@ -1,0 +1,16 @@
+{
+  "name": "MyApp",
+  "integrations": {
+    "capacitor": {
+      "enabled": true
+    },
+    "cordova": {}
+  },
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://cors.api.com/api"
+    }
+  ]
+}

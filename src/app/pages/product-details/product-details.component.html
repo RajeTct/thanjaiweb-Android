@@ -1,0 +1,147 @@
+<ion-content #container>
+
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-xs="12" size-lg="10">
+        <section>
+
+          <swiper (swiper)="onSwiperTopInitialized($event)" [config]="slideTopOpts">
+            <ng-template swiperSlide *ngFor="let slide of productFiles">
+              <div class="ion-activatable full-width">
+                <div class="slide-img" [style.background-image]="'url(' + slide.filePathwithExtension + ')'">
+                </div>
+                <ion-ripple-effect type="bounded"></ion-ripple-effect>
+              </div>
+            </ng-template>
+          </swiper><br />
+
+          <ion-row>
+            <ion-col size="12">
+              <div class="radius" style="background: var(--ion-color-white-tint)">
+                <div class="images" photoGalleryGroup>
+                  <swiper>
+                    <ng-template swiperSlide class="images-item">
+                      <div class="bg-img" defaultImage="./assets/img/placeholder.png">
+                      </div>
+                    </ng-template>
+                  </swiper>
+                </div>
+
+                <div class="ion-padding" *ngFor="let product of productDetails">
+                  <ion-item class="transparent" style="--padding-start: 0" lines="none">
+                    <ion-label class="ion-text-nowrap">
+                      <ion-text color="dark">
+                        <h2 class="bold ellipsis">
+                          {{product.clientName}}
+                        </h2>
+                      </ion-text>
+                      <ion-text color="dark">
+                        <h4 class="ellipsis">
+                          {{product.productName}}
+                        </h4>
+                      </ion-text>
+                    </ion-label>
+                  </ion-item>
+                  <div class="ion-text-wrap">
+                    <ion-text color="dark">
+                      <p class="text-medium">{{product.productDescribtion}}
+                      </p>
+                    </ion-text>
+                  </div>
+                  <!-- <div style="display: flex; flex-direction: column;">
+                    <ion-text color="medium" class="ion-text-wrap">
+                      <p>{{product.uoM_Value + product.uoM_ShortName}}</p>
+                      <p *ngIf="product.productOffer == 0 || todayDate > product.offerEndDate || product.offerEndDate ==
+                        null">
+                        <strong>{{product.totalPrice | currency: "INR"}}</strong>
+                      </p>
+                      <p *ngIf="product.productOffer> 0 && product.offerEndDate >=
+                        todayDate">
+                      <p class="Actualprice wrap">{{product.totalPrice | currency: "INR"}}
+                      </p>
+                    </ion-text>
+                  </div> -->
+                </div>
+
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <div class="html-content ion-padding-horizontal">
+          </div>
+
+        </section>
+
+        <section class="ion-margin-top">
+
+          <!-- <ion-row>
+            <ion-col size-xs="12" size-lg="7">
+              <div class="radius ion-padding ion-margin-bottom" style="background: var(--ion-color-white-tint)">
+
+                <div style="height:170px;" class="ion-text-center">
+                  <div class="flex-center">
+                    <ion-text color="medium">
+                      <p class="text-medium">
+                        fdvfdgvfdvgdgvfd
+                      </p>
+                    </ion-text>
+                  </div>
+                </div>
+              </div>
+            </ion-col>
+
+            <ion-col size-xs="12" size-lg="5">
+              <div class="radius ion-padding" style="background: var(--ion-color-white-tint)">
+
+                <ion-list class="ion-no-margin transparent">
+
+                  <ion-item class="transparent">
+                    <ion-icon slot="start" color="medium" name="phone-portrait-sharp"></ion-icon>
+                    <ion-label>
+                      <ion-text color="tertiary">
+                        <span class="text-medium link">875745648654</span>
+                      </ion-text>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item class="transparent">
+                    <ion-icon slot="start" color="medium" name="call"></ion-icon>
+                    <ion-label>
+                      <ion-text color="tertiary">
+                        <span class="text-medium link">454244fgfdg</span>
+                      </ion-text>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item class="transparent">
+                    <ion-icon slot="start" color="medium" name="mail"></ion-icon>
+                    <ion-label>
+                      <ion-text color="tertiary">
+                        <span class="text-medium link">ghdhgfgf</span>
+                      </ion-text>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item class="transparent">
+                    <ion-icon slot="start" color="medium" name="globe"></ion-icon>
+                    <ion-label>
+                      <ion-text color="tertiary">
+                        <span class="text-medium link">656345645</span>
+                      </ion-text>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+
+              </div>
+            </ion-col>
+          </ion-row> -->
+
+        </section>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- <app-footer class="hide-xs-up show-lg-up"></app-footer> -->
+
+</ion-content>

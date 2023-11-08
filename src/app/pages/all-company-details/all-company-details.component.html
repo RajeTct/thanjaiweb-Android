@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar color="primary" fixed>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="preference.currentTab"></ion-back-button>
+    </ion-buttons>
+    <div>
+      <ion-searchbar disabled="true" searchIcon="navigate" showClearButton="never" class="text-small" mode="ios"
+        [(ngModel)]="params.address" (click)="onPresentLocationSelectModal()"
+        [placeholder]="'ENTER_LOCATION' | translate" inputmode="search" type="search"></ion-searchbar>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button strong (click)="onViewMapButtonTouched()">
+        <ion-icon slot="icon-only" name="map-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="onPresentFilterModal()">
+        <ion-icon slot="icon-only" name="funnel-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+
+  <ion-grid fixed>
+
+    <div>
+
+      <!-- Top Slide List -->
+
+      <div class="ion-margin-bottom" *ngIf="slidesTop?.length">
+        <swiper (swiper)="onSwiperTopInitialized($event)" [config]="slideTopOpts">
+          <ng-template swiperSlide *ngFor="let slide of slidesTop">
+            <div class="ion-activatable full-width" (click)="onSlideTouched(slide)">
+              <div class="slide-img" [style.background-image]="'url(' + slide.image?._url + ')'">
+              </div>
+              <ion-ripple-effect type="bounded"></ion-ripple-effect>
+            </div>
+          </ng-template>
+        </swiper>
+      </div>
+
+      <div class="ion-padding">
+
+        <ion-row [@staggerIn]="places.length">
+
+          <!-- PAID CLIENTS -->
+          <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" *ngFor="let client of paidClients">
+
+            <ion-card button class="shadow ion-no-margin ion-margin-bottom" (click)="goToDetailPage(client)">
+              <!-- Check if files exist -->
+              <div *ngIf="client.files && client.files.length > 0" class="bg-img" [offset]="100"
+                [lazyLoad]="getFilePath(client.files)">
+                <!-- You can customize the image display here -->
+                <img class="bg-img" [src]="getFilePath(place.files)" alt="Place Image"
+                  [routerLink]="['./places/' + client.clientCustomUrl ]" />
+              </div>
+
+              <div *ngIf="!client.files || client.files.length === 0"
+                [style.background-color]="getPaidClientsColor(client)" class="bg-img"
+                [routerLink]="['./places/' + client.clientCustomUrl]">
+                <span
+                  style="font-size: 100px; font-family: serif;align-items: center;display: block;text-align: center;">
+                  {{ client.clientName.charAt(0) }}
+                </span>
+              </div>
+
+              <ion-card-content>
+                <div class="ion-text-nowrap">
+                  <ion-text color="dark">
+                    <h2 class="bold ellipsis text-medium">{{ client.clientName }}</h2>
+                  </ion-text>
+                  <p class="ellipsis text-small">
+                    <ion-text color="medium">
+                      <span>{{ client.districtName }}</span>&nbsp;
+                    </ion-text>
+                  </p>
+                </div>
+              </ion-card-content>
+
+            </ion-card>
+          </ion-col>
+          <!-- PAID CLIENTS -->
+
+          <!-- NOT PAID CLIENTS -->
+          <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" *ngFor="let client of notPaidClients">
+
+            <ion-card button class="shadow ion-no-margin ion-margin-bottom" (click)="goToDetailPage(client)">
+              <!-- Check if files exist -->
+              <div *ngIf="client.files && client.files.length > 0" class="bg-img" [offset]="100"
+                [lazyLoad]="getFilePath(client.files)">
+                <!-- You can customize the image display here -->
+                <img class="bg-img" [src]="getFilePath(client.files)" alt="Place Image"
+                  [routerLink]="['./places/' + client.clientCustomUrl ]" />
+              </div>
+
+              <div *ngIf="!client.files || client.files.length === 0"
+                [style.background-color]="getNotPaidClientsColor(client)" class="bg-img"
+                [routerLink]="['./places/' + client.clientCustomUrl]">
+                <span
+                  style="font-size: 100px; font-family: serif;align-items: center;display: block;text-align: center;">
+                  {{ client.clientName.charAt(0) }}
+                </span>
+              </div>
+
+              <ion-card-content>
+                <div class="ion-text-nowrap">
+                  <ion-text color="dark">
+                    <h2 class="bold ellipsis text-medium">{{ client.clientName }}</h2>
+                  </ion-text>
+                  <p class="ellipsis text-small">
+                    <ion-text color="medium">
+                      <span>{{ client.districtName }}</span>&nbsp;
+                    </ion-text>
+                  </p>
+                </div>
+              </ion-card-content>
+
+            </ion-card>
+          </ion-col>
+          <!-- NOT PAID CLIENTS -->
+        </ion-row>
+      </div>
+
+    </div>
+  </ion-grid>
+
+  <app-footer class="hide-xs-up show-lg-up"></app-footer>
+
+</ion-content>

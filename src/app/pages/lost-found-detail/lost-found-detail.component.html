@@ -1,0 +1,150 @@
+<ion-header>
+  <ion-toolbar color="primary" fixed>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="preference.currentTab"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="bold"></ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="!place">
+        <ion-icon slot="icon-only" [name]="isLiked ? 'heart' : 'heart-outline'"></ion-icon>
+      </ion-button>
+      <ion-button class="btn-share" [disabled]="!place">
+        <ion-icon slot="icon-only" name="share-social-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #container>
+
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-xs="12" size-lg="10">
+
+        <section>
+
+          <!-- <ion-row>
+            <ion-col size="12">
+              <swiper (swiper)="onSwiperTopInitialized($event)" [config]="slideTopOpts">
+                <ng-template swiperSlide *ngFor="let slide of eventFiles">
+                  <div class="ion-activatable full-width">
+                    <div class="slide-img" [style.background-image]="'url(' + slide.filePathwithExtension + ')'">
+                    </div>
+                    <ion-ripple-effect type="bounded"></ion-ripple-effect>
+                  </div>
+                </ng-template>
+              </swiper>
+            </ion-col>
+          </ion-row> -->
+        </section>
+
+        <section class="ion-margin-top">
+
+          <ion-row>
+
+            <ion-col size="12">
+              <swiper (swiper)="onSwiperTopInitialized($event)" [config]="slideTopOpts">
+                <ng-template swiperSlide *ngFor="let slide of lostFoundFiles">
+                  <div class="ion-activatable full-width">
+                    <div class="slide-img" [style.background-image]="'url(' + slide.filePathwithExtension + ')'">
+                    </div>
+                    <ion-ripple-effect type="bounded"></ion-ripple-effect>
+                  </div>
+                </ng-template>
+              </swiper>
+            </ion-col>
+
+            <ion-col size-xs="12" size-lg="5">
+              <div class="radius ion-padding" style="background: var(--ion-color-white-tint)">
+
+                <ion-list class="ion-no-margin transparent" *ngFor="let item of lostFoundArr">
+                  <ion-item class="transparent">
+                    <ion-label>
+                      <ion-text color="tertiary">
+                        <span class="text-medium">{{ item?.title }}</span>
+                      </ion-text>
+                    </ion-label>
+                  </ion-item>
+
+                  <!-- <ion-item class="transparent">
+                    <ion-text slot="start">
+                      <span class="text-medium bold">Date</span>
+                    </ion-text>
+                    <ion-label>
+                      <ion-text color="tertiary">
+                        <span class="text-medium">
+                          {{item.createdDate | date : 'yyyy-MM-dd'}}
+                        </span>
+                      </ion-text>
+                    </ion-label>
+                  </ion-item> -->
+
+                  <ion-item class="transparent">
+                    <ion-text slot="start">
+                      <span class="text-medium bold">Description</span>
+                    </ion-text>
+                    <ion-label>
+                      <ion-text color="tertiary">
+                        <span class="text-medium">{{ item?.genericAddressInfo[0].description }}</span>
+                      </ion-text>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item class="transparent">
+                    <ion-text slot="start">
+                      <span class="text-medium bold">Email</span>
+                    </ion-text>
+                    <ion-label>
+                      <ion-text color="tertiary">
+                        <span class="text-medium">{{ item?.genericAddressInfo[0].email }}</span>
+                      </ion-text>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item class="transparent">
+                    <ion-text slot="start">
+                      <span class="text-medium bold">Address Info</span>
+                    </ion-text>
+                    <ion-label>
+                      <ion-text color="tertiary">
+                        <span class="text-medium">{{ item?.genericAddressInfo[0].addressInfo }}</span>
+                      </ion-text>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item class="transparent">
+                    <ion-text slot="start">
+                      <span class="text-medium bold">Contact Info</span>
+                    </ion-text>
+                    <ion-label>
+                      <ion-text color="tertiary">
+                        <span class="text-medium">{{ item?.genericAddressInfo[0].contactInfo }}</span>
+                      </ion-text>
+                    </ion-label>
+                  </ion-item>
+
+                  <ion-item class="transparent">
+                    <ion-text slot="start">
+                      <span class="text-medium bold">City</span>
+                    </ion-text>
+                    <ion-label>
+                      <ion-text color="tertiary">
+                        <span class="text-medium">{{ item?.genericAddressInfo[0].cityName }}</span>
+                      </ion-text>
+                    </ion-label>
+                  </ion-item>
+                </ion-list>
+
+              </div>
+            </ion-col>
+          </ion-row>
+
+        </section>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-footer class="hide-xs-up show-lg-up"></app-footer>
+
+</ion-content>

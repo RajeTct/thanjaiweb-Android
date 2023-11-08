@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar color="primary" fixed>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="preference.currentTab"></ion-back-button>
+    </ion-buttons>
+    <div>
+      <ion-searchbar disabled="true" searchIcon="navigate" showClearButton="never" class="text-small" mode="ios"
+        [(ngModel)]="params.address" (click)="onPresentLocationSelectModal()"
+        [placeholder]="'ENTER_LOCATION' | translate" inputmode="search" type="search"></ion-searchbar>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button strong (click)="onViewMapButtonTouched()">
+        <ion-icon slot="icon-only" name="map-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="onPresentFilterModal()">
+        <ion-icon slot="icon-only" name="funnel-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+
+  <ion-grid fixed>
+    <div>
+
+      <!-- Top Slide List -->
+
+      <div class="ion-margin-bottom" *ngIf="slidesTop?.length">
+        <swiper (swiper)="onSwiperTopInitialized($event)" [config]="slideTopOpts">
+          <ng-template swiperSlide *ngFor="let slide of slidesTop">
+            <div class="ion-activatable full-width" (click)="onSlideTouched(slide)">
+              <div class="slide-img" [style.background-image]="'url(' + slide.image?._url + ')'">
+              </div>
+              <ion-ripple-effect type="bounded"></ion-ripple-effect>
+            </div>
+          </ng-template>
+        </swiper>
+      </div>
+
+      <div class="ion-padding">
+
+        <ion-item class="text-medium" lines="none" color="white">
+          <ion-input #txtSearchInput (input)="onSubmitSearch($event)" enterkeyhint="search" type="text"
+            [placeholder]="'SEARCH_HOME_PLACEHOLDER' | translate">
+          </ion-input>
+          <ion-button class="btn-search ion-no-margin" fill="clear" color="primary" slot="end"
+            (click)="onSubmitSearch($event)">
+            <ion-icon slot="icon-only" color="medium" name="search"></ion-icon>
+          </ion-button>
+        </ion-item><br/>
+
+        <ion-row [@staggerIn]="places.length">
+          <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" *ngFor="let product of productListArray">
+
+
+            <ion-card button class="shadow ion-no-margin ion-margin-bottom" (click)="openProductDetails(product)">
+
+              <span *ngIf="product.productFiles == 0 ; else showImg">
+                <div class="bg-img" [style.background-color]="getCardColor(product)">
+                  <span style="font-size: 135px;font-family: serif;">
+                    {{ product.productName.charAt(0) }}
+                  </span>
+                </div>
+              </span>
+
+              <ng-template #showImg>
+                <div *ngFor="let imgitem of product.productFiles;let i=index;" class="bg-img">
+                  <img class="bg-img" *ngIf="i == 0" [src]="imgitem.filePathwithExtension" />
+                </div>
+              </ng-template>
+
+              <ion-card-content>
+                <div class="ion-text-nowrap">
+                  <ion-text color="dark">
+                    <h2 class="bold ellipsis text-medium">{{ product.productName }}</h2>
+                  </ion-text>
+                  <p class="ellipsis text-small"
+                    *ngFor="let pro of product.multipleUOMPricing.slice(0, 1) ; let i = index">
+                    <ion-text color="medium">
+                      <span>{{pro.uoM_Value + pro.uoM_ShortName}}</span>&nbsp;
+                    </ion-text>
+                  </p>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </div>
+
+    </div>
+  </ion-grid>
+
+  <app-footer class="hide-xs-up show-lg-up"></app-footer>
+
+</ion-content>

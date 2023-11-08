@@ -1,0 +1,156 @@
+<ion-header>
+  <ion-toolbar color="primary" fixed>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="preference.currentTab"></ion-back-button>
+    </ion-buttons>
+    <div>
+      <ion-searchbar disabled="true" searchIcon="navigate" showClearButton="never" class="text-small" mode="ios"
+        [(ngModel)]="params.address" (click)="onPresentLocationSelectModal()"
+        [placeholder]="'ENTER_LOCATION' | translate" inputmode="search" type="search"></ion-searchbar>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button strong (click)="onViewMapButtonTouched()">
+        <ion-icon slot="icon-only" name="map-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="onPresentFilterModal()">
+        <ion-icon slot="icon-only" name="funnel-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="onReload($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher> -->
+
+  <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed" [hidden]="isLoadingViewVisible || isErrorViewVisible">
+    <ion-button #ionFabButton shape="round" strong color="secondary" [routerLink]="['../places/add']">
+      {{ 'ADD_PLACE' | translate }}
+      <ion-icon slot="start" name="add"></ion-icon>
+    </ion-button>
+  </ion-fab> -->
+
+  <ion-grid fixed>
+
+    <!-- <ion-row class="ion-margin-vertical ion-padding" *ngIf="isLoadingViewVisible">
+      <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" *ngFor="let item of skeletonArray">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-col>
+    </ion-row> -->
+
+    <div>
+
+      <!-- Top Slide List -->
+
+      <div class="ion-margin-bottom" *ngIf="slidesTop?.length">
+        <swiper (swiper)="onSwiperTopInitialized($event)" [config]="slideTopOpts">
+          <ng-template swiperSlide *ngFor="let slide of slidesTop">
+            <div class="ion-activatable full-width" (click)="onSlideTouched(slide)">
+              <div class="slide-img" [style.background-image]="'url(' + slide.image?._url + ')'">
+              </div>
+              <ion-ripple-effect type="bounded"></ion-ripple-effect>
+            </div>
+          </ng-template>
+        </swiper>
+      </div>
+
+      <div class="ion-padding">
+
+        <ion-item class="text-medium" lines="none" color="white">
+          <ion-input #txtSearchInput (keyup)="onSubmitSearch($event)" enterkeyhint="search" type="text"
+            [placeholder]="'SEARCH_HOME_PLACEHOLDER' | translate">
+          </ion-input>
+          <ion-button class="btn-search ion-no-margin" fill="clear" color="primary" slot="end"
+            (click)="onSubmitSearch($event)">
+            <ion-icon slot="icon-only" color="medium" name="search"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <div class="custom-select ion-margin-vertical" *ngIf="isContentViewVisible">
+          <ion-item style="--background: transparent; --background-hover: transparent; --inner-padding-end: 4px;"
+            lines="none">
+            <ion-label>
+              <ion-text color="medium">
+                {{ 'SORT_BY' | translate }}
+              </ion-text>
+            </ion-label>
+
+            <ion-select class="text-medium" [(ngModel)]="selectedSortOption" (ionChange)="onSortOptionTouched($event)"
+              [compareWith]="compareSortOption" interface="popover">
+              <ion-select-option [value]="option" *ngFor="let option of sortOptions">
+                {{ (option.sortByField + '_' + option.sortBy) | uppercase | translate }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+
+        <ion-row [@staggerIn]="places.length">
+          <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" *ngFor="let item of BloodRequiredArr">
+            <ion-card button class="shadow ion-no-margin ion-margin-bottom">
+
+              <!-- Check if files exist -->
+              <!-- <div *ngIf="item.files && item.files.length > 0" class="bg-img" [offset]="100"
+                [lazyLoad]="getFilePath(item.files)">               
+                <img class="bg-img" [src]="getFilePath(item.files)" alt="Place Image" />
+              </div> -->
+
+              <div class="bg-img">
+                <img *ngIf="item.bloodRequiredTypeId == 1" class="bg-img" src="assets\images\Blood\A+.png" />
+                <img *ngIf="item.bloodRequiredTypeId == 2" class="bg-img" src="assets\images\Blood\B+.png" />
+                <img *ngIf="item.bloodRequiredTypeId == 3" class="bg-img" src="assets\images\Blood\AB+.png" />
+                <img *ngIf="item.bloodRequiredTypeId == 4" class="bg-img" src="assets\images\Blood\o+.png" />
+                <img *ngIf="item.bloodRequiredTypeId == 5" class="bg-img" src="assets\images\Blood\A-.png" />
+                <img *ngIf="item.bloodRequiredTypeId == 6" class="bg-img" src="assets\images\Blood\B-.png" />
+                <img *ngIf="item.bloodRequiredTypeId == 7" class="bg-img" src="assets\images\Blood\AB-.png" />
+                <img *ngIf="item.bloodRequiredTypeId == 8" class="bg-img" src="assets\images\Blood\o-.png" />
+              </div>
+
+              <ion-card-content >
+                <div class="ion-text-nowrap" (click)="goToDetailPage(item)">
+                  <ion-text color="dark">
+                    <h2 class="bold ellipsis text-medium">{{ item.description }}</h2>
+                  </ion-text>
+                  <p class="ellipsis text-small">
+                    <ion-text color="medium">
+                      <span>{{item.addressInfo}}</span>&nbsp;
+                    </ion-text>
+                  </p>
+                  <ion-text color="medium">
+                    <span>{{item.email}}</span>&nbsp;
+                  </ion-text><br/>
+                  <ion-text color="medium">
+                    <span>{{item.createdDate | date:'MMM dd hh.mm a'}}</span>&nbsp;
+                  </ion-text>
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+
+        <ion-infinite-scroll *ngIf="isContentViewVisible && places.length" (ionInfinite)="onLoadMore($event)">
+          <ion-infinite-scroll-content></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
+        <div class="ion-margin-vertical" *ngIf="slidesBottom?.length">
+          <swiper (swiper)="onSwiperBottomInitialized($event)" [config]="slideBottomOpts">
+            <ng-template swiperSlide *ngFor="let slide of slidesBottom">
+              <div class="ion-activatable full-width" (click)="onSlideTouched(slide)">
+                <div class="slide-img" style="height: 100px;"
+                  [style.background-image]="'url(' + slide.image?._url + ')'">
+                </div>
+                <ion-ripple-effect type="bounded"></ion-ripple-effect>
+              </div>
+            </ng-template>
+          </swiper>
+        </div>
+
+      </div>
+
+    </div>
+  </ion-grid>
+
+  <app-footer class="hide-xs-up show-lg-up"></app-footer>
+
+</ion-content>
