@@ -50,23 +50,23 @@
                   </swiper>
                 </div>
 
-                <div class="ion-padding" *ngFor="let product of productDetails">
-                  <ion-item class="transparent" style="--padding-start: 0" lines="none">
-                    <ion-label class="ion-text-nowrap">
-                      <ion-text color="dark">
-                        <h2 class="bold ellipsis">
-                          {{product.clientName}}
-                        </h2>
-                      </ion-text>
-                      <ion-text color="dark">
-                        <h4 class="ellipsis">
-                          {{product.productName}}
-                        </h4>
-                      </ion-text>
-                    </ion-label>
-                  </ion-item>
+                <div class="ion-padding" *ngFor="let product of productDetails;let i = index;">
+                  <div class="ion-text-wrap" *ngIf="i < 1">
+                    <ion-item class="transparent" style="--padding-start: 0" lines="none">
+                      <ion-label class="ion-text-nowrap">
+                        <ion-text color="dark">
+                          <h2 class="bold ellipsis">
+                            {{product.clientName}}
+                          </h2>
+                        </ion-text>
+                        <ion-text color="dark">
+                          <h4 class="ellipsis">
+                            {{product.productName}}
+                          </h4>
+                        </ion-text>
+                      </ion-label>
+                    </ion-item>
 
-                  <div class="ion-text-wrap">
                     <ion-item>
                       <ion-text color="dark">
                         <p class="text-medium">{{product.productDescribtion}}
