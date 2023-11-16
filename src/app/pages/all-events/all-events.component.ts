@@ -150,11 +150,12 @@ export class AllEventsComponent extends BasePage {
   }
 
   ngOnInit() {
-    this.setupQueryParams();
+    //this.setupQueryParams();
     this.buildSortOptions();
 
     this.cityId = localStorage.getItem('selectedCityId');
     this.categoryTypeId = localStorage.getItem('CategoryTypeId');
+    this.params.address = localStorage.getItem('currentLocation');
 
     this.getAllClientBasicInfo();
 
@@ -195,7 +196,7 @@ export class AllEventsComponent extends BasePage {
       ...option
     };
 
-    this.onReload();
+    //this.onReload();
     this.reloadUrl();
   }
 
@@ -203,111 +204,111 @@ export class AllEventsComponent extends BasePage {
     return o1 && o2 ? (o1.sortBy === o2.sortBy && o1.sortByField === o2.sortByField) : o1 === o2;
   };
 
-  setupQueryParams() {
+  // setupQueryParams() {
 
-    const featured = this.getQueryParams().featured;
+  //   const featured = this.getQueryParams().featured;
 
-    if (featured === '1') {
-      this.params.featured = featured;
-    }
+  //   if (featured === '1') {
+  //     this.params.featured = featured;
+  //   }
 
-    const nearby = this.getQueryParams().nearby;
+  //   const nearby = this.getQueryParams().nearby;
 
-    if (nearby === '1') {
-      this.params.nearby = nearby;
-    }
+  //   if (nearby === '1') {
+  //     this.params.nearby = nearby;
+  //   }
 
-    const cat = this.getQueryParams().cat;
-    if (cat) {
-      this.params.cat = cat;
-    }
+  //   const cat = this.getQueryParams().cat;
+  //   if (cat) {
+  //     this.params.cat = cat;
+  //   }
 
-    const ratingMin = this.getQueryParams().ratingMin;
-    if (ratingMin) {
-      this.params.ratingMin = Number(ratingMin);
-    }
+  //   const ratingMin = this.getQueryParams().ratingMin;
+  //   if (ratingMin) {
+  //     this.params.ratingMin = Number(ratingMin);
+  //   }
 
-    const ratingMax = this.getQueryParams().ratingMax;
-    if (ratingMax) {
-      this.params.ratingMax = Number(ratingMax);
-    }
+  //   const ratingMax = this.getQueryParams().ratingMax;
+  //   if (ratingMax) {
+  //     this.params.ratingMax = Number(ratingMax);
+  //   }
 
-    const maxDistance = this.getQueryParams().maxDistance;
-    if (maxDistance) {
-      this.params.maxDistance = Number(maxDistance);
-    }
+  //   const maxDistance = this.getQueryParams().maxDistance;
+  //   if (maxDistance) {
+  //     this.params.maxDistance = Number(maxDistance);
+  //   }
 
-    let lat = this.getQueryParams().latitude;
-    let lng = this.getQueryParams().longitude;
+  //   let lat = this.getQueryParams().latitude;
+  //   let lng = this.getQueryParams().longitude;
 
-    if (lat && lng) {
-      lat = Number(lat);
-      lng = Number(lng);
-      this.params.latitude = lat;
-      this.params.longitude = lng;
-    }
+  //   if (lat && lng) {
+  //     lat = Number(lat);
+  //     lng = Number(lng);
+  //     this.params.latitude = lat;
+  //     this.params.longitude = lng;
+  //   }
 
-    const address = this.getQueryParams().address;
+  //   const address = this.getQueryParams().address;
 
-    if (address) {
-      this.params.address = this.getQueryParams().address;
-    }
+  //   if (address) {
+  //     this.params.address = this.getQueryParams().address;
+  //   }
 
-    const sortBy = this.getQueryParams().sortBy;
+  //   const sortBy = this.getQueryParams().sortBy;
 
-    if (sortBy) {
-      this.params.sortBy = sortBy;
-    }
+  //   if (sortBy) {
+  //     this.params.sortBy = sortBy;
+  //   }
 
-    const sortByField = this.getQueryParams().sortByField;
+  //   const sortByField = this.getQueryParams().sortByField;
 
-    if (sortByField) {
-      this.params.sortByField = sortByField;
-    }
+  //   if (sortByField) {
+  //     this.params.sortByField = sortByField;
+  //   }
 
-  }
+  // }
 
   onViewMapButtonTouched() {
     const params: any = this.getFilteredParams();
     this.navigateToRelative('./map', params);
   }
 
-  async ionViewDidEnter() {
+  // async ionViewDidEnter() {
 
-    this.setupAnimation();
+  //   this.setupAnimation();
 
-    if (this.params.address) {
-      this.updateSearchBarValue(this.params.address);
-    }
+  //   if (this.params.address) {
+  //     this.updateSearchBarValue(this.params.address);
+  //   }
 
-    const title = await this.getTrans('PLACES');
-    this.setPageTitle(title);
+  //   const title = await this.getTrans('PLACES');
+  //   this.setPageTitle(title);
 
-    this.setMetaTags({
-      title: title
-    });
+  //   this.setMetaTags({
+  //     title: title
+  //   });
 
-    if (!this.places.length) {
+  //   if (!this.places.length) {
 
-      this.showLoadingView({ showOverlay: false });
+  //     this.showLoadingView({ showOverlay: false });
 
-      if (typeof this.params.cat === 'string') {
-        this.category = new Category;
-        this.category.id = this.params.cat;
-        this.category.fetch();
-      }
+  //     if (typeof this.params.cat === 'string') {
+  //       this.category = new Category;
+  //       this.category.id = this.params.cat;
+  //       this.category.fetch();
+  //     }
 
-      this.onReload();
-    }
+  //     this.onReload();
+  //   }
 
-    this.swiperTop?.autoplay.stop();
-    this.swiperTop?.autoplay.start();
-    this.swiperTop?.update();
+  //   this.swiperTop?.autoplay.stop();
+  //   this.swiperTop?.autoplay.start();
+  //   this.swiperTop?.update();
 
-    this.swiperBottom?.autoplay.stop();
-    this.swiperBottom?.autoplay.start();
-    this.swiperBottom?.update();
-  }
+  //   this.swiperBottom?.autoplay.stop();
+  //   this.swiperBottom?.autoplay.start();
+  //   this.swiperBottom?.update();
+  // }
 
   enableMenuSwipe() {
     return false;
@@ -467,43 +468,43 @@ export class AllEventsComponent extends BasePage {
     this.ionSearchBar.value = val;
   }
 
-  async onPresentLocationSelectModal() {
+  // async onPresentLocationSelectModal() {
 
-    await this.showLoadingView({ showOverlay: true });
+  //   await this.showLoadingView({ showOverlay: true });
 
-    const modal = await this.modalCtrl.create({
-      component: LocationSelectPage
-    });
+  //   const modal = await this.modalCtrl.create({
+  //     component: LocationSelectPage
+  //   });
 
-    await modal.present();
+  //   await modal.present();
 
-    this.dismissLoadingView();
+  //   this.dismissLoadingView();
 
-    const { data } = await modal.onDidDismiss();
+  //   const { data } = await modal.onDidDismiss();
 
-    if (data) {
+  //   if (data) {
 
-      this.updateSearchBarValue(data.formatted_address);
+  //     this.updateSearchBarValue(data.formatted_address);
 
-      const location: LocationAddress = {
-        address: data.formatted_address,
-        latitude: data.geometry.location.lat(),
-        longitude: data.geometry.location.lng(),
-      };
+  //     const location: LocationAddress = {
+  //       address: data.formatted_address,
+  //       latitude: data.geometry.location.lat(),
+  //       longitude: data.geometry.location.lng(),
+  //     };
 
-      this.params.latitude = location.latitude;
-      this.params.longitude = location.longitude;
-      this.params.address = location.address;
+  //     this.params.latitude = location.latitude;
+  //     this.params.longitude = location.longitude;
+  //     this.params.address = location.address;
 
-      this.location = location;
+  //     this.location = location;
 
-      this.buildSortOptions();
+  //     this.buildSortOptions();
 
-      this.showLoadingView({ showOverlay: false });
-      this.onReload();
-      this.reloadUrl();
-    }
-  }
+  //     this.showLoadingView({ showOverlay: false });
+  //     this.onReload();
+  //     this.reloadUrl();
+  //   }
+  // }
 
   onSubmitSearch(event: any) {
     if ((event.type === 'keyup' && event.key === 'Enter') || event.type === 'click') {

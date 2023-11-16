@@ -121,4 +121,15 @@ ion-card {
     ion-card-content {
         padding: var(--content-padding, 8px) !important;
     }
+
+    .align-evenly-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Optional: Add padding to the container if needed */
+    .align-evenly-container {
+        padding: 0 16px;
+        /* Adjust as needed */
+    }
 }

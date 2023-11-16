@@ -153,7 +153,7 @@ export class HomePage extends BasePage {
         this.cities = data;
       }
     );
-
+   
   }
 
 
@@ -165,35 +165,35 @@ export class HomePage extends BasePage {
     this.navigateToRelative('./places/' + place.id + '/' + place.slug);
   }
 
-  async onPresentLocationSelectModal() {
+  // async onPresentLocationSelectModal() {
 
-    await this.showLoadingView({ showOverlay: true });
+  //   await this.showLoadingView({ showOverlay: true });
 
-    const modal = await this.modalCtrl.create({
-      component: LocationSelectPage,
-    });
+  //   const modal = await this.modalCtrl.create({
+  //     component: LocationSelectPage,
+  //   });
 
-    await modal.present();
+  //   await modal.present();
 
-    this.dismissLoadingView();
+  //   this.dismissLoadingView();
 
-    const { data } = await modal.onDidDismiss();
+  //   const { data } = await modal.onDidDismiss();
 
-    if (data) {
+  //   if (data) {
 
-      const location: LocationAddress = {
-        address: data.formatted_address,
-        latitude: data.geometry.location.lat(),
-        longitude: data.geometry.location.lng(),
-      };
+  //     const location: LocationAddress = {
+  //       address: data.formatted_address,
+  //       latitude: data.geometry.location.lat(),
+  //       longitude: data.geometry.location.lng(),
+  //     };
 
-      this.navigateToRelative('./places', {
-        latitude: location.latitude,
-        longitude: location.longitude,
-        address: location.address,
-      });
-    }
-  }
+  //     this.navigateToRelative('./places', {
+  //       latitude: location.latitude,
+  //       longitude: location.longitude,
+  //       address: location.address,
+  //     });
+  //   }
+  // }
 
   onSlideTouched(slide: Slide) {
 
@@ -338,7 +338,7 @@ export class HomePage extends BasePage {
 
   GetClientByCategoryTypeId(item: any) {
     localStorage.setItem('CategoryTypeId', item.categoryId);
-    localStorage.setItem('CategoryNameForHeader', item.categoryName);
+    localStorage.setItem('categoryHeaderName', item.categoryName);
   }
 
 
@@ -379,7 +379,8 @@ export class HomePage extends BasePage {
             })
             console.log(this.filteredCity[0].value);
             localStorage.setItem('selectedCityId', this.filteredCity[0].key);
-            localStorage.setItem('currentLocation', this.params.address);
+            localStorage.setItem('currentLocation', this.selectedCity);
+            this.params.address = this.selectedCity;
 
             this.locationCoords = new google.maps.LatLng(point);
 

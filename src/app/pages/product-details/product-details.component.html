@@ -1,6 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary" fixed>
+    <ion-buttons slot="end">
+      <ion-button (click)="onDismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <div>
+      <ion-searchbar disabled="true" searchIcon="navigate" showClearButton="never" class="text-small" mode="ios"
+        [(ngModel)]="params.address" [placeholder]="'ENTER_LOCATION' | translate" inputmode="search"
+        type="search"></ion-searchbar>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content #container>
 
   <ion-grid fixed>
+    <ion-row class="ion-align-items-center ion-padding-horizontal">
+      <ion-col size="12">
+        <h2 class="text-normal padding-small bold" style="margin-inline-start: -16px !important;">
+          PRODUCT DETAIL
+        </h2>
+      </ion-col>
+    </ion-row>
+
     <ion-row class="ion-justify-content-center">
       <ion-col size-xs="12" size-lg="10">
         <section>
@@ -42,25 +65,34 @@
                       </ion-text>
                     </ion-label>
                   </ion-item>
+
                   <div class="ion-text-wrap">
-                    <ion-text color="dark">
-                      <p class="text-medium">{{product.productDescribtion}}
-                      </p>
-                    </ion-text>
+                    <ion-item>
+                      <ion-text color="dark">
+                        <p class="text-medium">{{product.productDescribtion}}
+                        </p>
+                      </ion-text>
+                    </ion-item>
                   </div>
-                  <!-- <div style="display: flex; flex-direction: column;">
-                    <ion-text color="medium" class="ion-text-wrap">
-                      <p>{{product.uoM_Value + product.uoM_ShortName}}</p>
-                      <p *ngIf="product.productOffer == 0 || todayDate > product.offerEndDate || product.offerEndDate ==
+
+                  <div class="ion-text-wrap">
+                    <ion-row>
+                      <ion-col>
+                        <p>{{product.uoM_Value + product.uoM_ShortName}}</p>
+                      </ion-col>
+
+                      <ion-col>
+                        <p *ngIf="product.productOffer == 0 || todayDate > product.offerEndDate || product.offerEndDate ==
                         null">
-                        <strong>{{product.totalPrice | currency: "INR"}}</strong>
-                      </p>
-                      <p *ngIf="product.productOffer> 0 && product.offerEndDate >=
-                        todayDate">
-                      <p class="Actualprice wrap">{{product.totalPrice | currency: "INR"}}
-                      </p>
-                    </ion-text>
-                  </div> -->
+                          <strong>{{product.totalPrice | currency: "INR"}}</strong>
+                        </p>
+
+                        <p *ngIf="product.productOffer> 0 && product.offerEndDate >= todayDate">
+                          <strong>{{product.totalPrice | currency: "INR"}}
+                          </strong>
+                      </ion-col>
+                    </ion-row>
+                  </div>
                 </div>
 
               </div>
@@ -142,6 +174,6 @@
     </ion-row>
   </ion-grid>
 
-  <!-- <app-footer class="hide-xs-up show-lg-up"></app-footer> -->
+  <app-footer class="hide-xs-up show-lg-up"></app-footer>
 
 </ion-content>

@@ -145,9 +145,9 @@ export class PlaceDetailPage extends BasePage {
     this.clientService.GetClientInfoByClientCustomUrl(this.customUrl).subscribe(
       async (data: any) => {
 
-        if (data.data[0].isVerify) {
-          this.isVerify = data.data[0].isVerify;
-        }
+        // if (data.data[0].isVerify) {
+        //   this.isVerify = data.data[0].isVerify;
+        // }
 
         // if (data.data.length == 0) {
         //   this.noRecords = true;

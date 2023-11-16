@@ -63,14 +63,7 @@ const routes: Routes = [
             path: 'posts/:id/:slug',
             loadChildren: () => import('../pages/post-detail/post-detail.module').then(m => m.PostDetailPageModule)
           },
-          {
-            path: 'product-search',
-            loadChildren: () => import('../pages/product-search/product-search.module').then(m => m.ProductSearchModule)
-          },
-          {
-            path: 'company-search',
-            loadChildren: () => import('../pages/company-search/company-search.module').then(m => m.CompanySearchModule)
-          },
+
           {
             path: 'all-events',
             loadChildren: () => import('../pages/all-events/all-events.module').then(m => m.AllEventsModule)
@@ -95,10 +88,7 @@ const routes: Routes = [
             path: 'lost-found-detail',
             loadChildren: () => import('../pages/lost-found-detail/lost-found-detail.module').then(m => m.LostFoundDetailModule)
           },
-          {
-            path: 'product-detail',
-            loadChildren: () => import('../pages/product-details/product-details.module').then(m => m.ProductDetailsModule)
-          },
+
           {
             path: 'all-company-details',
             loadChildren: () => import('../pages/all-company-details/all-company-details.module').then(m => m.AllCompanyDetailsModule)
@@ -111,8 +101,17 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../pages/category-list/category-list.module').then(m => m.CategoryListPageModule)
+            loadChildren: () => import('../pages/product-search/product-search.module').then(m => m.ProductSearchModule)
           },
+          {
+            path: 'product-detail',
+            loadChildren: () => import('../pages/product-details/product-details.module').then(m => m.ProductDetailsModule)
+          },
+
+          // {
+          //   path: '',
+          //   loadChildren: () => import('../pages/category-list/category-list.module').then(m => m.CategoryListPageModule)
+          // },
           {
             path: 'search',
             loadChildren: () => import('../pages/search/search.module').then(m => m.SearchPageModule)
@@ -164,8 +163,12 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => import('../pages/post-list/post-list.module').then(m => m.PostListPageModule)
+            loadChildren: () => import('../pages/company-search/company-search.module').then(m => m.CompanySearchModule)
           },
+          // {
+          //   path: '',
+          //   loadChildren: () => import('../pages/post-list/post-list.module').then(m => m.PostListPageModule)
+          // },
           {
             path: 'search',
             loadChildren: () => import('../pages/search/search.module').then(m => m.SearchPageModule)

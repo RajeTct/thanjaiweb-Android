@@ -211,5 +211,7 @@
   "UNSPECIFIED": "Unspecified",
   "WHATS_APP_SHARE_TEXT": "Hi, I found your listing {{ placeUrl }} on {{ appName }}. Please send me more information and contact me on WhatsApp.",
   "WHATS_APP_PLACEHOLDER": "Phone number with country code",
-  "WHATS_APP_HELPER": "Country code + phone number. Do not include zeros, parentheses, or hyphens when adding the phone number in this format."
+  "WHATS_APP_HELPER": "Country code + phone number. Do not include zeros, parentheses, or hyphens when adding the phone number in this format.",
+  "PRODUCT": "Product",
+  "COMPANY": "Company"
 }

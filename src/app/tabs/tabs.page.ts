@@ -158,4 +158,12 @@ export class TabsPage extends BasePage implements OnInit {
       return this.tabs.outlet.pop(deep - 1, tab);
     }
   }
+
+  goToProduct() {
+    this.router.navigateByUrl('/1/home/product-search');
+  }
+
+  goToCompany() {
+    this.router.navigateByUrl('/1/home/company-search');
+  }
 }

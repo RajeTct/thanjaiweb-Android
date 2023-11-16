@@ -141,6 +141,7 @@ export class AllLostFoundComponent extends BasePage {
   ngOnInit() {
     this.buildSortOptions();
     this.cityId = localStorage.getItem('selectedCityId');
+    this.params.address = localStorage.getItem('currentLocation');
 
     this.lostFoundFilter();
   }
@@ -179,7 +180,7 @@ export class AllLostFoundComponent extends BasePage {
       ...option
     };
 
-    this.onReload();
+    //this.onReload();
     this.reloadUrl();
   }
 
@@ -193,42 +194,42 @@ export class AllLostFoundComponent extends BasePage {
     this.navigateToRelative('./map', params);
   }
 
-  async ionViewDidEnter() {
+  // async ionViewDidEnter() {
 
-    this.setupAnimation();
+  //   this.setupAnimation();
 
-    if (this.params.address) {
-      this.updateSearchBarValue(this.params.address);
-    }
+  //   if (this.params.address) {
+  //     this.updateSearchBarValue(this.params.address);
+  //   }
 
-    const title = await this.getTrans('PLACES');
-    this.setPageTitle(title);
+  //   const title = await this.getTrans('PLACES');
+  //   this.setPageTitle(title);
 
-    this.setMetaTags({
-      title: title
-    });
+  //   this.setMetaTags({
+  //     title: title
+  //   });
 
-    if (!this.places.length) {
+  //   if (!this.places.length) {
 
-      this.showLoadingView({ showOverlay: false });
+  //     this.showLoadingView({ showOverlay: false });
 
-      if (typeof this.params.cat === 'string') {
-        this.category = new Category;
-        this.category.id = this.params.cat;
-        this.category.fetch();
-      }
+  //     if (typeof this.params.cat === 'string') {
+  //       this.category = new Category;
+  //       this.category.id = this.params.cat;
+  //       this.category.fetch();
+  //     }
 
-      this.onReload();
-    }
+  //     this.onReload();
+  //   }
 
-    this.swiperTop?.autoplay.stop();
-    this.swiperTop?.autoplay.start();
-    this.swiperTop?.update();
+  //   this.swiperTop?.autoplay.stop();
+  //   this.swiperTop?.autoplay.start();
+  //   this.swiperTop?.update();
 
-    this.swiperBottom?.autoplay.stop();
-    this.swiperBottom?.autoplay.start();
-    this.swiperBottom?.update();
-  }
+  //   this.swiperBottom?.autoplay.stop();
+  //   this.swiperBottom?.autoplay.start();
+  //   this.swiperBottom?.update();
+  // }
 
   enableMenuSwipe() {
     return false;
@@ -290,35 +291,35 @@ export class AllLostFoundComponent extends BasePage {
     }
   }
 
-  async onPresentFilterModal() {
+  // async onPresentFilterModal() {
 
-    await this.showLoadingView({ showOverlay: true });
+  //   await this.showLoadingView({ showOverlay: true });
 
-    const modal = await this.modalCtrl.create({
-      component: FilterPlacePage,
-      componentProps: { params: this.getFilteredParams() }
-    });
+  //   const modal = await this.modalCtrl.create({
+  //     component: FilterPlacePage,
+  //     componentProps: { params: this.getFilteredParams() }
+  //   });
 
-    await modal.present();
+  //   await modal.present();
 
-    this.dismissLoadingView();
+  //   this.dismissLoadingView();
 
-    const { data } = await modal.onDidDismiss();
+  //   const { data } = await modal.onDidDismiss();
 
-    if (data) {
+  //   if (data) {
 
-      const params = {
-        ...this.params,
-        ...data
-      };
+  //     const params = {
+  //       ...this.params,
+  //       ...data
+  //     };
 
-      this.params = params;
+  //     this.params = params;
 
-      this.showLoadingView({ showOverlay: false });
-      this.onReload();
-      this.reloadUrl();
-    }
-  }
+  //     this.showLoadingView({ showOverlay: false });
+  //     this.onReload();
+  //     this.reloadUrl();
+  //   }
+  // }
 
   onLoadMore(event: any = {}) {
     this.infiniteScroll = event.target;

@@ -5,49 +5,15 @@
     </ion-buttons>
     <div>
       <ion-searchbar disabled="true" searchIcon="navigate" showClearButton="never" class="text-small" mode="ios"
-        [(ngModel)]="params.address" (click)="onPresentLocationSelectModal()"
+        [(ngModel)]="params.address" 
         [placeholder]="'ENTER_LOCATION' | translate" inputmode="search" type="search"></ion-searchbar>
     </div>
-    <ion-buttons slot="end">
-      <ion-button strong (click)="onViewMapButtonTouched()">
-        <ion-icon slot="icon-only" name="map-outline"></ion-icon>
-      </ion-button>
-      <ion-button (click)="onPresentFilterModal()">
-        <ion-icon slot="icon-only" name="funnel-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [scrollEvents]="true">
-  <!-- 
-  <ion-refresher slot="fixed" (ionRefresh)="onReload($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed" [hidden]="isLoadingViewVisible || isErrorViewVisible">
-    <ion-button #ionFabButton shape="round" strong color="secondary" [routerLink]="['../places/add']">
-      {{ 'ADD_PLACE' | translate }}
-      <ion-icon slot="start" name="add"></ion-icon>
-    </ion-button>
-  </ion-fab> -->
-
   <ion-grid fixed>
-
-    <!-- <ion-row class="ion-margin-vertical ion-padding" *ngIf="isLoadingViewVisible">
-      <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" *ngFor="let item of skeletonArray">
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-col>
-    </ion-row> -->
-
-    <!-- <empty-view *ngIf="isErrorViewVisible" icon="alert-circle-outline" [text]="'ERROR_NETWORK' | translate">
-    </empty-view>
-
-    <empty-view *ngIf="isEmptyViewVisible" icon="map" [text]="'EMPTY_PLACES' | translate">
-    </empty-view> -->
-
-    <div>
-
+    <section>
       <!-- Top Slide List -->
 
       <div class="ion-margin-bottom" *ngIf="slidesTop?.length">
@@ -64,15 +30,27 @@
 
       <div class="ion-padding">
 
-        <ion-row [@staggerIn]="places.length">
-          <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" *ngFor="let client of paidClients">
+        <ion-row class="ion-align-items-center ion-padding-horizontal">
+          <ion-col size="12">
+            <h2 class="text-normal padding-small bold" style="margin-inline-start: -16px !important;">
+              {{categoryHeaderName}}
+            </h2>
+          </ion-col>
+        </ion-row>
+
+        <div class="div" *ngIf="paidClients.length == 0 && notPaidClients.length == 0">
+          <img class="bg-img" src="./assets/images/no-records-img.jpg" alt="Place Image" />
+        </div>
+
+        <ion-row [@staggerIn]="places.length" class="ion-padding-start companyscrollable">
+          <ion-col size-xs="6" size-sm="4" size-md="3" *ngFor="let client of paidClients">
 
             <ion-card button class="shadow ion-no-margin ion-margin-bottom" (click)="goToDetailPage(client)">
               <!-- Check if files exist -->
               <div *ngIf="client.files && client.files.length > 0" class="bg-img" [offset]="100"
                 [lazyLoad]="getFilePath(client.files)">
                 <!-- You can customize the image display here -->
-                <img class="bg-img" [src]="getFilePath(place.files)" alt="Place Image"
+                <img class="bg-img" [src]="getFilePath(client.files)" alt="Place Image"
                   [routerLink]="['./places/' + client.clientCustomUrl ]" />
               </div>
 
@@ -98,38 +76,28 @@
                 </div>
               </ion-card-content>
 
-              <!-- <div *ngIf="!place.files || place.files.length === 0" [style.background-color]="getCardColorSearch(place)"
-                class="bg-img" [routerLink]="['./places/' + place.clientCustomUrl ]">
-                <span
-                  style="font-size: 100px; font-family: serif;align-items: center;display: block;text-align: center;">
-                  {{ place.clientName.charAt(0) }}
-                </span>
-              </div>
-
-              <ion-card-content>
-                <div class="ion-text-nowrap">
-                  <ion-text color="dark">
-                    <h2 class="bold ellipsis text-medium" [routerLink]="['./places/' + place.clientCustomUrl ]">
-                      {{ place.clientName }}
-                    </h2>
-                  </ion-text>
-                  <p class="ellipsis text-small">
-                    <ion-text color="medium">
-                      <span [routerLink]="['./places/' + place.clientCustomUrl ]">{{ place.districtName }}</span>&nbsp;
-                    </ion-text>
-                  </p>
-                </div>
-              </ion-card-content> -->
-
             </ion-card>
           </ion-col>
 
-          <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" *ngFor="let client of notPaidClients">
+          <ion-col size-xs="6" size-sm="4" size-md="3" *ngFor="let client of notPaidClients">
 
             <ion-card button class="shadow ion-no-margin ion-margin-bottom" (click)="goToDetailPage(client)">
 
-              <img class="bg-img" [offset]="100" defaultImage="./assets/img/placeholder.png"
-                [lazyLoad]="getFilePath(client.files)" />
+              <div *ngIf="client.files && client.files.length > 0" class="bg-img" [offset]="100"
+                [lazyLoad]="getFilePath(client.files)">
+                <!-- You can customize the image display here -->
+                <img class="bg-img" [src]="getFilePath(client.files)" alt="Place Image"
+                  [routerLink]="['./places/' + client.clientCustomUrl ]" />
+              </div>
+
+              <div *ngIf="!client.files || client.files.length === 0"
+                [style.background-color]="getCardColor2Search(client)" class="bg-img"
+                [routerLink]="['./places/' + client.clientCustomUrl]">
+                <span
+                  style="font-size: 100px; font-family: serif;align-items: center;display: block;text-align: center;">
+                  {{ client.clientName.charAt(0) }}
+                </span>
+              </div>
 
               <ion-card-content>
                 <div class="ion-text-nowrap">
@@ -148,7 +116,7 @@
         </ion-row>
       </div>
 
-    </div>
+    </section>
   </ion-grid>
 
   <app-footer class="hide-xs-up show-lg-up"></app-footer>

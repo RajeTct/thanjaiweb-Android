@@ -3,21 +3,22 @@
     <ion-buttons slot="start">
       <ion-back-button [defaultHref]="preference.currentTab"></ion-back-button>
     </ion-buttons>
-    <ion-title class="bold"></ion-title>
-    <ion-buttons slot="end">
-      <ion-button  [disabled]="!place">
-        <ion-icon slot="icon-only" [name]="isLiked ? 'heart' : 'heart-outline'"></ion-icon>
-      </ion-button>
-      <ion-button class="btn-share"  [disabled]="!place">
-        <ion-icon slot="icon-only" name="share-social-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-title class="bold"></ion-title>   
   </ion-toolbar>
 </ion-header>
 
 <ion-content #container>
 
   <ion-grid fixed>
+    
+    <ion-row class="ion-align-items-center ion-padding-horizontal">
+      <ion-col size="12">
+        <h2 class="text-normal padding-small bold" style="margin-inline-start: -16px !important;">
+          BLOOD REQUIRED INFO
+        </h2>
+      </ion-col>
+    </ion-row>
+
     <ion-row class="ion-justify-content-center">
       <ion-col size-xs="12" size-lg="10">
 
@@ -66,9 +67,9 @@
           <ion-row>
 
             <ion-col size-xs="12" size-lg="5">
-              <div class="radius ion-padding" style="background: var(--ion-color-white-tint)">
+              <div class="radius ion-padding align-evenly-container" style="background: var(--ion-color-white-tint)">
 
-                <ion-list class="ion-no-margin transparent" *ngFor="let item of bloodRequiredDetails">                 
+                <ion-list class="ion-no-margin transparent" *ngFor="let item of bloodRequiredDetails">
                   <ion-item class="transparent">
                     <ion-text slot="start">
                       <span class="text-medium bold">Patient/Hospital Name</span>

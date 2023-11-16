@@ -481,7 +481,7 @@ export class CompanySearchComponent extends BasePage {
   }
 
   onSubmitSearch(event: any) {
-    if ((event.type === 'keyup' || event.key === 'Enter') || event.type === 'click') {
+    if ((event.type === 'keyup' || event.key === 'Enter') || event.type === 'click' || event.type === 'input') {
       // this.navigateToRelative('../search', {
       //   q: this.txtSearchInput.value
       // });

@@ -8,14 +8,6 @@
         [(ngModel)]="params.address" (click)="onPresentLocationSelectModal()"
         [placeholder]="'ENTER_LOCATION' | translate" inputmode="search" type="search"></ion-searchbar>
     </div>
-    <ion-buttons slot="end">
-      <ion-button strong (click)="onViewMapButtonTouched()">
-        <ion-icon slot="icon-only" name="map-outline"></ion-icon>
-      </ion-button>
-      <ion-button (click)="onPresentFilterModal()">
-        <ion-icon slot="icon-only" name="funnel-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -48,11 +40,18 @@
             (click)="onSubmitSearch($event)">
             <ion-icon slot="icon-only" color="medium" name="search"></ion-icon>
           </ion-button>
-        </ion-item><br/>
+        </ion-item><br />
+
+        <ion-row class="ion-align-items-center ion-padding-horizontal">
+          <ion-col size="12">
+            <h2 class="text-normal padding-small bold" style="margin-inline-start: -16px !important;">
+              PRODUCT LIST
+            </h2>
+          </ion-col>
+        </ion-row>
 
         <ion-row [@staggerIn]="places.length">
-          <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" *ngFor="let product of productListArray">
-
+          <ion-col size-xs="6" size-sm="4" size-md="3" *ngFor="let product of productListArray">
 
             <ion-card button class="shadow ion-no-margin ion-margin-bottom" (click)="openProductDetails(product)">
 

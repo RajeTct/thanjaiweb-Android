@@ -5,40 +5,15 @@
     </ion-buttons>
     <div>
       <ion-searchbar disabled="true" searchIcon="navigate" showClearButton="never" class="text-small" mode="ios"
-        [(ngModel)]="params.address" (click)="onPresentLocationSelectModal()"
-        [placeholder]="'ENTER_LOCATION' | translate" inputmode="search" type="search"></ion-searchbar>
+        [(ngModel)]="params.address" [placeholder]="'ENTER_LOCATION' | translate" inputmode="search"
+        type="search"></ion-searchbar>
     </div>
-    <ion-buttons slot="end">
-      <ion-button strong (click)="onViewMapButtonTouched()">
-        <ion-icon slot="icon-only" name="map-outline"></ion-icon>
-      </ion-button>
-      <ion-button (click)="onPresentFilterModal()">
-        <ion-icon slot="icon-only" name="funnel-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [scrollEvents]="true">
 
-  <!-- <ion-refresher slot="fixed" (ionRefresh)="onReload($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher> -->
-
-  <!-- <ion-fab vertical="bottom" horizontal="center" slot="fixed" [hidden]="isLoadingViewVisible || isErrorViewVisible">
-    <ion-button #ionFabButton shape="round" strong color="secondary" [routerLink]="['../places/add']">
-      {{ 'ADD_PLACE' | translate }}
-      <ion-icon slot="start" name="add"></ion-icon>
-    </ion-button>
-  </ion-fab> -->
-
   <ion-grid fixed>
-
-    <!-- <ion-row class="ion-margin-vertical ion-padding" *ngIf="isLoadingViewVisible">
-      <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" *ngFor="let item of skeletonArray">
-        <ion-skeleton-text animated></ion-skeleton-text>
-      </ion-col>
-    </ion-row> -->
 
     <div>
 
@@ -68,27 +43,17 @@
           </ion-button>
         </ion-item>
 
-        <div class="custom-select ion-margin-vertical" *ngIf="isContentViewVisible">
-          <ion-item style="--background: transparent; --background-hover: transparent; --inner-padding-end: 4px;"
-            lines="none">
-            <ion-label>
-              <ion-text color="medium">
-                {{ 'SORT_BY' | translate }}
-              </ion-text>
-            </ion-label>
-
-            <ion-select class="text-medium" [(ngModel)]="selectedSortOption" (ionChange)="onSortOptionTouched($event)"
-              [compareWith]="compareSortOption" interface="popover">
-              <ion-select-option [value]="option" *ngFor="let option of sortOptions">
-                {{ (option.sortByField + '_' + option.sortBy) | uppercase | translate }}
-              </ion-select-option>
-            </ion-select>
-          </ion-item>
-        </div>
+        <ion-row class="ion-align-items-center ion-padding-horizontal">
+          <ion-col size="12">
+            <h2 class="text-normal padding-small bold" style="margin-inline-start: -16px !important;">
+             ALL EVENTS
+            </h2>
+          </ion-col>
+        </ion-row>
 
         <ion-row [@staggerIn]="places.length">
-          <ion-col size-xs="12" size-sm="6" size-md="6" size-lg="4" *ngFor="let item of eventsArr">
-            <ion-card button class="shadow ion-no-margin ion-margin-bottom">
+          <ion-col size-xs="6" size-sm="4" size-md="3" *ngFor="let item of eventsArr">
+            <ion-card button class="shadow ion-no-margin ion-margin-bottom" (click)="goToDetailPage(item)">
 
               <span *ngIf="item.eventFiles.length == 0; else showImg">
                 <img class="bg-img" src="assets\images\Events.jpg" />
@@ -101,7 +66,7 @@
               </ng-template>
 
               <ion-card-content>
-                <div class="ion-text-nowrap" (click)="goToDetailPage(item)">
+                <div class="ion-text-nowrap">
                   <ion-text color="dark">
                     <h2 class="bold ellipsis text-medium">{{ item.eventTitle }}</h2>
                   </ion-text>

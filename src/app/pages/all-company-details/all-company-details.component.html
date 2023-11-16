@@ -5,17 +5,9 @@
     </ion-buttons>
     <div>
       <ion-searchbar disabled="true" searchIcon="navigate" showClearButton="never" class="text-small" mode="ios"
-        [(ngModel)]="params.address" (click)="onPresentLocationSelectModal()"
+        [(ngModel)]="params.address" 
         [placeholder]="'ENTER_LOCATION' | translate" inputmode="search" type="search"></ion-searchbar>
     </div>
-    <ion-buttons slot="end">
-      <ion-button strong (click)="onViewMapButtonTouched()">
-        <ion-icon slot="icon-only" name="map-outline"></ion-icon>
-      </ion-button>
-      <ion-button (click)="onPresentFilterModal()">
-        <ion-icon slot="icon-only" name="funnel-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -23,7 +15,7 @@
 
   <ion-grid fixed>
 
-    <div>
+    <section>
 
       <!-- Top Slide List -->
 
@@ -41,6 +33,14 @@
 
       <div class="ion-padding">
 
+        <ion-row class="ion-align-items-center ion-padding-horizontal">
+          <ion-col size="12">
+            <h2 class="text-normal padding-small bold" style="margin-inline-start: -16px !important;">
+              {{categoryHeaderName}}
+            </h2>
+          </ion-col>
+        </ion-row>
+
         <ion-row [@staggerIn]="places.length">
 
           <!-- PAID CLIENTS -->
@@ -51,7 +51,7 @@
               <div *ngIf="client.files && client.files.length > 0" class="bg-img" [offset]="100"
                 [lazyLoad]="getFilePath(client.files)">
                 <!-- You can customize the image display here -->
-                <img class="bg-img" [src]="getFilePath(place.files)" alt="Place Image"
+                <img class="bg-img" [src]="getFilePath(client.files)" alt="Place Image"
                   [routerLink]="['./places/' + client.clientCustomUrl ]" />
               </div>
 
@@ -121,7 +121,7 @@
         </ion-row>
       </div>
 
-    </div>
+    </section>
   </ion-grid>
 
   <app-footer class="hide-xs-up show-lg-up"></app-footer>
