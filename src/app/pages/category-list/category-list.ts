@@ -234,4 +234,8 @@ export class CategoryListPage extends BasePage {
       });
   }
 
+  getImageUrl() {
+    // Specify the correct path to your image in the assets folder
+    return '/assets/images/banner3.png';
+  }
 }

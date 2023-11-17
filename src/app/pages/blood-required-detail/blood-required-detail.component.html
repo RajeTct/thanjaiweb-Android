@@ -3,14 +3,14 @@
     <ion-buttons slot="start">
       <ion-back-button [defaultHref]="preference.currentTab"></ion-back-button>
     </ion-buttons>
-    <ion-title class="bold"></ion-title>   
+    <ion-title class="bold"></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content #container>
 
   <ion-grid fixed>
-    
+
     <ion-row class="ion-align-items-center ion-padding-horizontal">
       <ion-col size="12">
         <h2 class="text-normal padding-small bold" style="margin-inline-start: -16px !important;">
@@ -70,71 +70,59 @@
               <div class="radius ion-padding align-evenly-container" style="background: var(--ion-color-white-tint)">
 
                 <ion-list class="ion-no-margin transparent" *ngFor="let item of bloodRequiredDetails">
-                  <ion-item class="transparent">
-                    <ion-text slot="start">
-                      <span class="text-medium bold">Patient/Hospital Name</span>
-                    </ion-text>
-                    <ion-label>
-                      <ion-text color="tertiary">
-                        <span class="text-medium">{{ item?.genericAddressInfo[0].description }}</span>
-                      </ion-text>
-                    </ion-label>
-                  </ion-item>
+                  <ion-row>
+                    <ion-col size="4">
+                      <span class="text-small bold">Patient/Hospital Name</span>
+                    </ion-col>
+                    <ion-col>
+                      <span class="text-medium">{{ item?.genericAddressInfo[0].description }}</span>
+                    </ion-col>
+                  </ion-row>
 
-                  <ion-item class="transparent">
-                    <ion-text slot="start">
-                      <span class="text-medium bold">Blood Type</span>
-                    </ion-text>
-                    <ion-label>
-                      <ion-text color="tertiary">
-                        <span class="text-medium">{{ item?.bloodRequiredName }}</span>
-                      </ion-text>
-                    </ion-label>
-                  </ion-item>
+                  <ion-row>
+                    <ion-col size="4">
+                      <span class="text-small bold">Blood Type</span>
+                    </ion-col>
+                    <ion-col>
+                      <span class="text-medium">{{ item?.bloodRequiredName }}</span>
+                    </ion-col>
+                  </ion-row>
 
-                  <ion-item class="transparent">
-                    <ion-text slot="start">
-                      <span class="text-medium bold">Contact Info</span>
-                    </ion-text>
-                    <ion-label>
-                      <ion-text color="tertiary">
-                        <span class="text-medium">{{ item?.genericAddressInfo[0].description }}</span>
-                      </ion-text>
-                    </ion-label>
-                  </ion-item>
+                  <ion-row>
+                    <ion-col size="4">
+                      <span class="text-small bold">Contact Info</span>
+                    </ion-col>
+                    <ion-col>
+                      <span class="text-medium">{{ item?.genericAddressInfo[0].description }}</span>
+                    </ion-col>
+                  </ion-row>
 
-                  <ion-item class="transparent">
-                    <ion-text slot="start">
-                      <span class="text-medium bold">Email</span>
-                    </ion-text>
-                    <ion-label>
-                      <ion-text color="tertiary">
-                        <span class="text-medium">{{ item?.genericAddressInfo[0].email }}</span>
-                      </ion-text>
-                    </ion-label>
-                  </ion-item>
+                  <ion-row>
+                    <ion-col size="4">
+                      <span class="text-small bold">Email</span>
+                    </ion-col>
+                    <ion-col>
+                      <span class="text-medium">{{ item?.genericAddressInfo[0].email }}</span>
+                    </ion-col>
+                  </ion-row>
 
-                  <ion-item class="transparent">
-                    <ion-text slot="start">
-                      <span class="text-medium bold">Address Info</span>
-                    </ion-text>
-                    <ion-label>
-                      <ion-text color="tertiary">
-                        <span class="text-medium">{{ item?.genericAddressInfo[0].addressInfo }}</span>
-                      </ion-text>
-                    </ion-label>
-                  </ion-item>
+                  <ion-row>
+                    <ion-col size="4">
+                      <span class="text-small bold">Address Info</span>
+                    </ion-col>
+                    <ion-col>
+                      <span class="text-medium">{{ item?.genericAddressInfo[0].addressInfo }}</span>
+                    </ion-col>
+                  </ion-row>
 
-                  <ion-item class="transparent">
-                    <ion-text slot="start">
-                      <span class="text-medium bold">City Name</span>
-                    </ion-text>
-                    <ion-label>
-                      <ion-text color="tertiary">
-                        <span class="text-medium">{{ item?.genericAddressInfo[0].cityName }}</span>
-                      </ion-text>
-                    </ion-label>
-                  </ion-item>
+                  <ion-row>
+                    <ion-col size="4">
+                      <span class="text-small bold">City Name</span>
+                    </ion-col>
+                    <ion-col>
+                      <span class="text-medium">{{ item?.genericAddressInfo[0].cityName }}</span>
+                    </ion-col>
+                  </ion-row>
                 </ion-list>
 
               </div>

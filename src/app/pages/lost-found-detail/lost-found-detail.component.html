@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button [defaultHref]="preference.currentTab"></ion-back-button>
     </ion-buttons>
-    <ion-title class="bold"></ion-title>    
+    <ion-title class="bold"></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +14,7 @@
     <ion-row class="ion-align-items-center ion-padding-horizontal">
       <ion-col size="12">
         <h2 class="text-normal padding-small bold" style="margin-inline-start: -16px !important;">
-         LOST/FOUND INFO
+          LOST/FOUND INFO
         </h2>
       </ion-col>
     </ion-row>
@@ -42,81 +42,60 @@
               <div class="radius ion-padding" style="background: var(--ion-color-white-tint)">
 
                 <ion-list class="ion-no-margin transparent" *ngFor="let item of lostFoundArr">
-                  <ion-item class="transparent">
-                    <ion-label>
-                      <ion-text color="tertiary">
-                        <span class="text-medium">{{ item?.title }}</span>
-                      </ion-text>
-                    </ion-label>
-                  </ion-item>
 
-                  <!-- <ion-item class="transparent">
-                    <ion-text slot="start">
-                      <span class="text-medium bold">Date</span>
-                    </ion-text>
-                    <ion-label>
-                      <ion-text color="tertiary">
-                        <span class="text-medium">
-                          {{item.createdDate | date : 'yyyy-MM-dd'}}
-                        </span>
-                      </ion-text>
-                    </ion-label>
-                  </ion-item> -->
+                  <ion-row>
+                    <ion-col size="4">
+                      <span class="text-small bold">Person/Thing Name</span>
+                    </ion-col>
+                    <ion-col>
+                      <span class="text-medium">{{ item?.title }}</span>
+                    </ion-col>
+                  </ion-row>
 
-                  <ion-item class="transparent">
-                    <ion-text slot="start">
-                      <span class="text-medium bold">Description</span>
-                    </ion-text>
-                    <ion-label>
-                      <ion-text color="tertiary">
-                        <span class="text-medium">{{ item?.genericAddressInfo[0].description }}</span>
-                      </ion-text>
-                    </ion-label>
-                  </ion-item>
+                  <ion-row>
+                    <ion-col size="4">
+                      <span class="text-small bold">Description</span>
+                    </ion-col>
+                    <ion-col>
+                      <span class="text-medium">{{ item?.genericAddressInfo[0].description }}</span>
+                    </ion-col>
+                  </ion-row>
 
-                  <ion-item class="transparent">
-                    <ion-text slot="start">
-                      <span class="text-medium bold">Email</span>
-                    </ion-text>
-                    <ion-label>
-                      <ion-text color="tertiary">
-                        <span class="text-medium">{{ item?.genericAddressInfo[0].email }}</span>
-                      </ion-text>
-                    </ion-label>
-                  </ion-item>
+                  <ion-row>
+                    <ion-col size="4">
+                      <span class="text-small bold">Email</span>
+                    </ion-col>
+                    <ion-col>
+                      <span class="text-medium">{{ item?.genericAddressInfo[0].email }}</span>
+                    </ion-col>
+                  </ion-row>
 
-                  <ion-item class="transparent">
-                    <ion-text slot="start">
-                      <span class="text-medium bold">Address Info</span>
-                    </ion-text>
-                    <ion-label>
-                      <ion-text color="tertiary">
-                        <span class="text-medium">{{ item?.genericAddressInfo[0].addressInfo }}</span>
-                      </ion-text>
-                    </ion-label>
-                  </ion-item>
+                  <ion-row>
+                    <ion-col size="4">
+                      <span class="text-small bold">Address Info</span>
+                    </ion-col>
+                    <ion-col>
+                      <span class="text-medium">{{ item?.genericAddressInfo[0].addressInfo }}</span>
+                    </ion-col>
+                  </ion-row>
 
-                  <ion-item class="transparent">
-                    <ion-text slot="start">
-                      <span class="text-medium bold">Contact Info</span>
-                    </ion-text>
-                    <ion-label>
-                      <ion-text color="tertiary">
-                        <span class="text-medium">{{ item?.genericAddressInfo[0].contactInfo }}</span>
-                      </ion-text>
-                    </ion-label>
-                  </ion-item>
+                  <ion-row>
+                    <ion-col size="4">
+                      <span class="text-small bold">City Name</span>
+                    </ion-col>
+                    <ion-col>
+                      <span class="text-medium">{{ item?.genericAddressInfo[0].cityName }}</span>
+                    </ion-col>
+                  </ion-row>
 
-                  <ion-item class="transparent">
-                    <ion-text slot="start">
-                      <span class="text-medium bold">City</span>
-                    </ion-text>
-                    <ion-label>
-                      <ion-text color="tertiary">
-                        <span class="text-medium">{{ item?.genericAddressInfo[0].cityName }}</span>
-                      </ion-text>
-                    </ion-label>
-                  </ion-item>
+                  <ion-row>
+                    <ion-col size="4">
+                      <span class="text-small bold">Contact Info</span>
+                    </ion-col>
+                    <ion-col>
+                      <span class="text-medium">{{ item?.genericAddressInfo[0].contactInfo }}</span>
+                    </ion-col>
+                  </ion-row>                
                 </ion-list>
 
               </div>

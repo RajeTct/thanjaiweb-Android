@@ -26,7 +26,7 @@ export class ProductDetailsComponent implements OnInit {
   @ViewChild(IonContent, { static: true }) container: IonContent;
   @ViewChild('ionFabButton', { static: false, read: ElementRef }) ionFabButton: ElementRef;
   @ViewChild('txtSearchInput', { static: false }) txtSearchInput: IonInput;
- 
+
   @HostListener('ionScroll', ['$event']) async onScroll($event: any) {
 
     const isScrollingDown = $event.detail.velocityY > 0;
@@ -82,9 +82,7 @@ export class ProductDetailsComponent implements OnInit {
   public slidesTop: Slide[] = [];
   public params: any = {};
 
-  preference: any = {
-    currentTab: 'defaultTab', // Initialize with a default value
-  };
+  colors: string[] = ['lightpink', 'lightblue', 'lightgreen', 'lightyellow', 'lavender'];
 
   constructor(private navParams: NavParams,
     private clientService: ClientService, private zone: NgZone,
@@ -126,6 +124,17 @@ export class ProductDetailsComponent implements OnInit {
 
   onDismiss() {
     return this.modalCtrl.dismiss();
+  }
+
+  getCardColor(product: any): string {
+    const index = this.productDetails.indexOf(product);
+    const colorIndex = index % this.colors.length;
+    return this.colors[colorIndex];
+  }
+
+  getImageUrl() {
+    // Specify the correct path to your image in the assets folder
+    return '/assets/images/banner3.png';
   }
 
 }
