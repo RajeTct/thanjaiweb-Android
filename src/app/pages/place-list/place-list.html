@@ -5,8 +5,8 @@
     </ion-buttons>
     <div>
       <ion-searchbar disabled="true" searchIcon="navigate" showClearButton="never" class="text-small" mode="ios"
-        [(ngModel)]="params.address" 
-        [placeholder]="'ENTER_LOCATION' | translate" inputmode="search" type="search"></ion-searchbar>
+        [(ngModel)]="params.address" [placeholder]="'ENTER_LOCATION' | translate" inputmode="search"
+        type="search"></ion-searchbar>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -42,7 +42,8 @@
           <img class="bg-img" src="./assets/images/no-records-img.jpg" alt="Place Image" />
         </div>
 
-        <ion-row [@staggerIn]="places.length" class="ion-padding-start companyscrollable">
+        <ion-row [@staggerIn]="places.length" class="ion-padding-start companyscrollable"
+          *ngIf="paidClients.length > 0 || notPaidClients.length > 0">
           <ion-col size-xs="6" size-sm="4" size-md="3" *ngFor="let client of paidClients">
 
             <ion-card button class="shadow ion-no-margin ion-margin-bottom" (click)="goToDetailPage(client)">

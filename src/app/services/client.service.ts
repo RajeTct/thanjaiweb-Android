@@ -243,4 +243,28 @@ export class ClientService {
       .pipe(retry(2), catchError(this.handleError));
   }
 
+  //Get video url list by clientid
+  GetClientVideoUrlByClient(clientId: any, IsPublic: any): Observable<any[]> {
+    const apiurl = `${apiUrl.GetClientVideoUrlByClient}?clientId=${clientId}&IsPublic=${IsPublic}`;
+    return this.http
+      .get<any[]>(`${apiurl}`)
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
+  //Get working hours  by passing clientId
+  getWorkingHoursByClient(clientId: any): Observable<any> {
+    const apiurl = `${apiUrl.get_WorkingHoursByClient}?clientId=${clientId}`;
+    return this.http
+      .get<any[]>(`${apiurl}`)
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
+  //Get Method for get Aboutus and Moreinfo
+  GetDetailInfo(clientId: any) {
+    const apiurl = `${apiUrl.GetDetailInfo}?clientId=${clientId}`;
+    return this.http
+      .get<any[]>(`${apiurl}`)
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
 }

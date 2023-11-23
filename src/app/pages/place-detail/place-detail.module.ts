@@ -7,10 +7,11 @@ import { SharePageModule } from '../share/share.module';
 import { LightboxModule } from 'src/app/components/lightbox/lightbox.module';
 import { DirectivesModule } from 'src/app/directives/directives.module';
 import { SwiperModule } from 'swiper/angular';
- 
+import { SafePipe } from 'src/app/_helper/safe.pipe';
+
 @NgModule({
   declarations: [
-    PlaceDetailPage,
+    PlaceDetailPage, SafePipe
   ],
   imports: [
     SharedModule,
@@ -28,4 +29,4 @@ import { SwiperModule } from 'swiper/angular';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class PlaceDetailPageModule {}
+export class PlaceDetailPageModule { }

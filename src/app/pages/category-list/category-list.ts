@@ -238,4 +238,9 @@ export class CategoryListPage extends BasePage {
     // Specify the correct path to your image in the assets folder
     return '/assets/images/banner3.png';
   }
+
+  // //Go to company list page
+  goToListPage(category) {
+    localStorage.setItem('categoryHeaderName',category.categoryName);
+  }
 }

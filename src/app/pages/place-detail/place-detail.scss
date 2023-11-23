@@ -1,5 +1,5 @@
 ion-content {
-  --background: var(--ion-color-light);
+  // --background: var(--ion-color-light);
 }
 
 ion-grid {
@@ -39,9 +39,9 @@ ion-thumbnail {
   height: 80px;
 }
 
-ion-list {
-  background: var(--ion-color-light);
-}
+// ion-list {
+//   background: var(--ion-color-light);
+// }
 
 .flex-start {
   display: flex;
@@ -141,4 +141,83 @@ ion-card {
   ion-card-content {
     padding: var(--content-padding, 8px) !important;
   }
+}
+
+ion-thumbnail iframe {
+  width: 100%;
+  height: 100%;
+}
+
+.iframe-container {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  /* 16:9 aspect ratio */
+  border: 1px solid #ddd;
+  /* Optional: Add a border for a better visual effect */
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.videoTitle {
+  font-size: 20px;
+  color: #858484;
+  font-weight: 600;
+}
+
+.Cardtitle {
+  font-weight: bolder;
+  // text-align: center;
+  font-size: 23px;
+  color: #979797;
+}
+
+.slot {
+  text-align: center;
+}
+
+.slotTime {
+  text-align: center;
+}
+
+.workingdays {
+  color: #7e89ee;
+  font-size: 14px;
+  font-family: serif;
+  font-weight: bold;
+}
+
+.abtus {
+  font-size: 18px;
+  color: #4545da;
+  font-weight: 800;
+  padding: 8px 0px 8px 0px;
+}
+
+ion-content {
+  height: auto;
+}
+
+.tabLable {
+  border: 1px solid #a4a4a4;
+  padding: 5px 8px;
+  border-radius: 33px;
+  color: #fb296b;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+ion-segment-button.segment-checked .tabLable {
+  color: #2c29fb !important;
+}
+
+.tabLabel.active {
+  color: red !important;
 }

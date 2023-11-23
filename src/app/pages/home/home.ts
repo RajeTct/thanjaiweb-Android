@@ -367,17 +367,16 @@ export class HomePage extends BasePage {
             // Extract the district value if found
             if (districtComponent) {
               const district = districtComponent.long_name;
-              this.selectedCity = district;
-              console.log('District:', district);
+              this.selectedCity = district;            
               // You can now use the 'district' variable wherever you need it in your code
             } else {
-              console.log('District not found in the address components.');
+              alert('District not found in the address components.');
             }
 
             this.filteredCity = this.cities.filter(data => {
               return data.value == this.selectedCity;
             })
-            console.log(this.filteredCity[0].value);
+           
             localStorage.setItem('selectedCityId', this.filteredCity[0].key);
             localStorage.setItem('currentLocation', this.selectedCity);
             this.params.address = this.selectedCity;

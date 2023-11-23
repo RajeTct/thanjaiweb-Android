@@ -289,8 +289,7 @@ export class AppComponent extends BasePage {
     try {
       await this.updateInstallation({ localeIdentifier: lang });
       await this.storage.setLang(lang);
-    } catch (error) {
-      console.log(error);
+    } catch (error) {      
     }
 
     window.location.reload();
@@ -402,7 +401,7 @@ export class AppComponent extends BasePage {
 
     // Some issue with our setup and push will not work
     PushNotifications.addListener('registrationError', (error: any) => {
-      console.log('Error on registration: ' + JSON.stringify(error));
+     
     });
 
     // Show us the notification payload if the app is open on our device

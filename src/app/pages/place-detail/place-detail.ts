@@ -6,7 +6,6 @@ import { Place } from '../../services/place-service';
 import { User } from '../../services/user-service';
 import { Review } from '../../services/review-service';
 import { environment } from '../../../environments/environment';
-import { DomSanitizer } from '@angular/platform-browser';
 import { SharePage } from '../share/share.page';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { Report } from 'src/app/services/report.service';
@@ -17,6 +16,9 @@ import { MapStyle } from 'src/app/services/map-style';
 import { ClientService } from 'src/app/services/client.service';
 import { Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize } from '@ngx-gallery/core';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
+
 
 @Component({
   selector: 'app-place-detail',
@@ -48,6 +50,7 @@ export class PlaceDetailPage extends BasePage {
   public backButtonListener: any;
 
   public mapStyles: string;
+
 
   public webSocialShare: { show: boolean, share: any, onClosed: any } = {
     show: false,
@@ -117,6 +120,18 @@ export class PlaceDetailPage extends BasePage {
   products: any;
   withoutHeaderProducts: any[];
   withHeaderProducts: [];
+  urlList = Array();
+  Videolength: any;
+  videoURL: any;
+  hours!: any[];
+  hoursLength: any;
+  clientMoreDetails: any;
+  aboutUs: any;
+  AboutLength: any;
+  aboutUs1: any;
+  moreInfo: any;
+  MoreInfoLength: any;
+  selectedTab = 'first';
 
   constructor(injector: Injector,
     private placeService: Place,
@@ -129,6 +144,8 @@ export class PlaceDetailPage extends BasePage {
     super(injector);
     this.isReviewsEnabled = true;
     this.skeletonReviews = Array(5);
+    this.selectedTab = 'first';
+
   }
 
   ngOnDestroy() {
@@ -144,10 +161,7 @@ export class PlaceDetailPage extends BasePage {
 
     this.clientService.GetClientInfoByClientCustomUrl(this.customUrl).subscribe(
       async (data: any) => {
-
-        // if (data.data[0].isVerify) {
-        //   this.isVerify = data.data[0].isVerify;
-        // }
+        this.isVerify = data.data[0].isVerify;
 
         // if (data.data.length == 0) {
         //   this.noRecords = true;
@@ -168,6 +182,10 @@ export class PlaceDetailPage extends BasePage {
           this.getAllProductListForTabSearch();
           this.getProductHeaderByClientId(this.clientId);
           this.getProductByClientId(this.clientId);
+          this.Getclientvideourllist();
+          this.GetWorkingHours();
+          this.GetDetail();
+
         }, 1500);
 
       });
@@ -639,5 +657,137 @@ export class PlaceDetailPage extends BasePage {
       });
   }
 
+  // to get Client videos by client id
+  Getclientvideourllist() {
+    this.clientService.GetClientVideoUrlByClient(this.clientId, 2).subscribe(
+      async (data: any) => {
+        this.urlList = data.data;
+        this.Videolength = data.data.length;
+        for (var i = 0; i < data.data.length; i++) {
+          this.videoURL = data.data[i].videoUrl;
+        }
+      });
+  }
 
+  GetWorkingHours() {
+    this.clientService.getWorkingHoursByClient(this.clientId).subscribe({
+      next: (data: any) => {
+        for (var i = 0; i < data.data.length; i++) {
+          this.hours = data.data;
+          this.hoursLength = data.data.length;
+
+          Object.assign(data.data[i], {
+            weekdaysId: data.data[i].weekdaysId.split(',').map(Number),
+          });
+
+          if (data.data[i].availableTime1Start == null) {
+            Object.assign(data.data[i], {
+              availableTime1Start: 'NA',
+            })
+          }
+
+          if (data.data[i].availableTime2Start == null) {
+            Object.assign(data.data[i], {
+              availableTime2Start: 'NA',
+            })
+          }
+
+          if (data.data[i].availableTime3Start == null) {
+            Object.assign(data.data[i], {
+              availableTime3Start: 'NA',
+            })
+          }
+
+          if (data.data[i].availableTime1End == null) {
+            Object.assign(data.data[i], {
+              availableTime1End: 'NA',
+            })
+          }
+
+          if (data.data[i].availableTime2End == null) {
+            Object.assign(data.data[i], {
+              availableTime2End: 'NA',
+            })
+          }
+
+          if (data.data[i].availableTime3End == null) {
+            Object.assign(data.data[i], {
+              availableTime3End: 'NA',
+            })
+          }
+
+
+          var weekdays = data.data[i].weekdaysId;
+
+          for (var x = 0; x < data.data[i].weekdaysId.length; x++) {
+            if (data.data[i].weekdaysId[x] == 1) {
+              var index = weekdays.indexOf(1);
+              weekdays[index] = ' Monday ';
+            }
+            if (data.data[i].weekdaysId[x] == 2) {
+              var index = weekdays.indexOf(2);
+              weekdays[index] = ' Tuesday ';
+            }
+            if (data.data[i].weekdaysId[x] == 3) {
+              var index = weekdays.indexOf(3);
+              weekdays[index] = ' Wednesday ';
+            }
+            if (data.data[i].weekdaysId[x] == 4) {
+              var index = weekdays.indexOf(4);
+              weekdays[index] = ' Thursday ';
+            }
+            if (data.data[i].weekdaysId[x] == 5) {
+              var index = weekdays.indexOf(5);
+              weekdays[index] = ' Friday ';
+            }
+            if (data.data[i].weekdaysId[x] == 6) {
+              var index = weekdays.indexOf(6);
+              weekdays[index] = ' Saturday ';
+            }
+            if (data.data[i].weekdaysId[x] == 7) {
+              var index = weekdays.indexOf(7);
+              weekdays[index] = ' Sunday ';
+            }
+          }
+        }
+      },
+    });
+  }
+
+  GetDetail() {
+    this.clientService.GetDetailInfo(this.clientId).subscribe(
+      async (data: any) => {
+        this.clientMoreDetails = data.data;
+        if (this.clientMoreDetails != null) {
+          if (data.data.aboutUs != null) {
+            this.aboutUs = data.data.aboutUs;
+            this.AboutLength = data.data.aboutUs.length;
+            this.aboutUs1 = this.aboutUs.replace(/<[^>]*>/g, '');
+            this.moreInfo = data.data.moreInfo;
+            this.MoreInfoLength = data.data.moreInfo.length;
+          }
+        }
+      });
+  }
+
+  segmentChanged(ev: any) {
+    this.selectedTab = ev.detail.value;
+  }
+
+  //Used to show product details in pop-up
+  async openProductDetails(product) {
+    await this.showLoadingView({ showOverlay: true });
+
+    const modal = await this.modalCtrl.create({
+      component: ProductDetailsComponent,
+      componentProps: {
+        id: product.id,
+        clientId: product.clientId
+      }
+    });
+
+    await modal.present();
+
+    await this.dismissLoadingView();
+  }
 }

@@ -45,4 +45,10 @@ export const apiUrl = {
 
   //To get All Districts
   GetAllDistricts: `${baseUrl}Lookup/GetAllDistricts`,
+
+  GetClientVideoUrlByClient: `${baseUrl}ClientBasicInfo/GetClientVideoUrlByClient`,
+  get_WorkingHoursByClient: `${baseUrl}ClientWorkinghours/GetWorkinghoursByClient`,
+
+  //Get Method for get Aboutus and Moreinfo
+  GetDetailInfo: `${baseUrl}ClientDetailsInfo/GetDetailInfo`,
 }

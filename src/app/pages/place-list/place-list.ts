@@ -519,9 +519,9 @@ export class PlaceListPage extends BasePage {
         //Used to show Category Header Name
         this.categoryHeaderName = data.data[0].categoryName;
       }
-      // else {
-      //   this.categoryHeaderName = localStorage.getItem('categoryHeaderName');
-      // }
+      if (data.data.length == 0) {
+        this.categoryHeaderName = localStorage.getItem('categoryHeaderName');
+      }
       this.paidClientDataLength = data.data.length;
     });
   }
@@ -534,9 +534,10 @@ export class PlaceListPage extends BasePage {
         //Used to show Category Header Name
         this.categoryHeaderName = data.data[0].categoryName;
       }
-      // else {
-      //   this.categoryHeaderName = localStorage.getItem('categoryHeaderName');
-      // }
+
+      if (data.data.length == 0) {
+        this.categoryHeaderName = localStorage.getItem('categoryHeaderName');
+      }
       this.notPaidClientDataLength = data.data.length;
     });
   }

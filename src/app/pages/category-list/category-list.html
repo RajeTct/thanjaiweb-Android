@@ -52,7 +52,7 @@
         <ion-col class="column-center" size-xs="4" size-sm="4" size-md="3" size-lg="3"
           *ngFor="let category of categoryTypesBycity">
           <ion-card button class="transparent no-shadow" [routerLink]="[pathPrefix + 'places']"
-            [queryParams]="{ cat: category.id }">
+            [queryParams]="{ cat: category.id }" (click)="goToListPage(category)">
             <img [offset]="100" defaultImage="./assets/img/placeholder.png"
               [lazyLoad]="category.categoryfiles[0].filePathwithExtension"  />
             <ion-card-content class="ion-text-center">
@@ -66,18 +66,6 @@
     </div>
 
   </ion-grid>
-
-  <!-- <div class="ion-margin-vertical" *ngIf="slidesBottom?.length">
-    <swiper (swiper)="onSwiperBottomInitialized($event)" [config]="slideBottomOpts">
-      <ng-template swiperSlide *ngFor="let slide of slidesBottom">
-        <div class="ion-activatable full-width" (click)="onSlideTouched(slide)">
-          <div class="slide-img" style="height: 100px;" [style.background-image]="'url(' + slide.image?._url + ')'">
-          </div>
-          <ion-ripple-effect type="bounded"></ion-ripple-effect>
-        </div>
-      </ng-template>
-    </swiper>
-  </div> -->
 
   <app-footer class="hide-xs-up show-lg-up"></app-footer>
 
